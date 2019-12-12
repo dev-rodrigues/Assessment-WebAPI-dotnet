@@ -2,19 +2,16 @@
 using System.ComponentModel.DataAnnotations;
 using Newtonsoft.Json;
 
-namespace API.Models
-{
+namespace API.Models {
     // Modelos usados como parâmetros para as ações AccountController.
 
-    public class AddExternalLoginBindingModel
-    {
+    public class AddExternalLoginBindingModel {
         [Required]
         [Display(Name = "Token de acesso externo")]
         public string ExternalAccessToken { get; set; }
     }
 
-    public class ChangePasswordBindingModel
-    {
+    public class ChangePasswordBindingModel {
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Senha atual")]
@@ -32,8 +29,7 @@ namespace API.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class RegisterBindingModel
-    {
+    public class RegisterBindingModel {
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -50,15 +46,13 @@ namespace API.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class RegisterExternalBindingModel
-    {
+    public class RegisterExternalBindingModel {
         [Required]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
 
-    public class RemoveLoginBindingModel
-    {
+    public class RemoveLoginBindingModel {
         [Required]
         [Display(Name = "Provedor de logon")]
         public string LoginProvider { get; set; }
@@ -68,8 +62,7 @@ namespace API.Models
         public string ProviderKey { get; set; }
     }
 
-    public class SetPasswordBindingModel
-    {
+    public class SetPasswordBindingModel {
         [Required]
         [StringLength(100, ErrorMessage = "O {0} deve ter pelo menos {2} caracteres.", MinimumLength = 6)]
         [DataType(DataType.Password)]
