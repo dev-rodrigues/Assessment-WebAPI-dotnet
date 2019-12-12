@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace CORE.Service {
     public class BookRepository : Repository<Book>, IBook {
         public void Destroy(Book book) {
-            throw new NotImplementedException();
+            base.Delete(book);
         }
 
         public List<Book> Index() {

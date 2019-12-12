@@ -67,5 +67,17 @@ namespace API.Controllers.Book {
             }
             return BadRequest("Erro ao processar a solicitaçao");
         }
+
+        [HttpDelete]
+        public IHttpActionResult Destroy(int id) {
+            var book = GetBookRepository.Show(id);
+            
+
+            if(book != null) {
+                GetBookRepository.Delete(book);
+                return Ok();
+            }
+            return BadRequest("Erro ao processar a solicitaçao");
+        }
     }
 }

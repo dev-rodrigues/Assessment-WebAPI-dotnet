@@ -38,5 +38,14 @@ namespace DATA.Repository {
                 return null;
             }
         }
+
+        public void Delete(T objeto) {
+            try {
+                Db.GetInstance.Entry(objeto).State = System.Data.Entity.EntityState.Deleted;
+                Db.GetInstance.SaveChanges();
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+            }
+        }
     }
 }
