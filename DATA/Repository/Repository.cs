@@ -47,5 +47,14 @@ namespace DATA.Repository {
                 Console.WriteLine(e.Message);
             }
         }
+
+        public List<T> FindAll() {
+            try {
+                return Db.GetInstance.Set<T>().ToList();
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
     }
 }

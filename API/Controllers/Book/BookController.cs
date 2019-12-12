@@ -31,6 +31,18 @@ namespace API.Controllers.Book {
             GetBookRepository = new BookRepository();
         }
 
+        [HttpGet]
+        public IHttpActionResult Index() {
+            var books = GetBookRepository.Index();
+
+            if(books != null) {
+
+                return Ok(books);
+            }
+            return BadRequest("Erro ao processar a solicitaçao");
+        }
+
+
         [HttpPost]
         public IHttpActionResult Store(InputBookModel input) {
             var book = GetBookRepository.Store(InputBookModel.Create(input));
@@ -71,7 +83,7 @@ namespace API.Controllers.Book {
         [HttpDelete]
         public IHttpActionResult Destroy(int id) {
             var book = GetBookRepository.Show(id);
-            
+
 
             if(book != null) {
                 GetBookRepository.Delete(book);

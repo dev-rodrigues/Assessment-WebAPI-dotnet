@@ -13,7 +13,7 @@ namespace CORE.Service {
         }
 
         public List<Book> Index() {
-            throw new NotImplementedException();
+            return base.FindAll();
         }
 
         public Book Show(int id) {
