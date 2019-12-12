@@ -17,5 +17,12 @@ namespace API.Models.Input {
                 Year = input.Year
             };
         }
+
+        public static Book UpdateBook(InputBookModel input, Book book) {
+            book.Title = input.Title;
+            book.ISBN = input.ISBN;
+            book.Year = input.Year;
+            return book;
+        }
     }
 }

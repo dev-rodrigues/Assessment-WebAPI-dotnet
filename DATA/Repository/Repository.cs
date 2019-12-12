@@ -27,5 +27,16 @@ namespace DATA.Repository {
                 return null;
             }
         }
+
+        public T Update(T objeto) {
+            try {
+                Db.GetInstance.Entry(objeto).State = System.Data.Entity.EntityState.Modified;
+                Db.GetInstance.SaveChanges();
+                return objeto;
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
     }
 }

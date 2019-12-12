@@ -25,7 +25,7 @@ namespace CORE.Service {
         }
 
         public Book Update(Book book) {
-            throw new NotImplementedException();
+            return base.Update(book);
         }
     }
 }

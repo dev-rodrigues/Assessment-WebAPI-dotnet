@@ -52,5 +52,20 @@ namespace API.Controllers.Book {
             }
             return BadRequest("Erro ao processar a solicitaçao");
         }
+
+        [HttpPut]
+        public IHttpActionResult Update(int book_id, InputBookModel input) {
+            var old_book = GetBookRepository.Show(book_id);
+            if(old_book != null) {
+                var updated_book = InputBookModel.UpdateBook(input, old_book);
+
+                if(updated_book != null) {
+                    var updated = GetBookRepository.Update(updated_book);
+                    var output = OutputBookModel.CreateOutput(updated);
+                    return Ok(output);
+                }
+            }
+            return BadRequest("Erro ao processar a solicitaçao");
+        }
     }
 }
