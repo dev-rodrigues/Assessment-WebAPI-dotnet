@@ -18,5 +18,14 @@ namespace DATA.Repository {
                 return null;
             }
         }
+
+        public T FindOne(object id) {
+            try {
+                return Db.GetInstance.Set<T>().Find(id);
+            } catch(Exception e) {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
     }
 }

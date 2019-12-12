@@ -17,7 +17,7 @@ namespace CORE.Service {
         }
 
         public Book Show(int id) {
-            throw new NotImplementedException();
+            return base.FindOne(id);
         }
 
         public Book Store(Book book) {
