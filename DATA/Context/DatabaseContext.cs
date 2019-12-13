@@ -1,4 +1,5 @@
 ﻿using CORE.Models;
+using DATA.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,9 +14,19 @@ namespace DATA.Context {
             get; set;
         }
 
+        public DbSet<Author> Authors {
+            get; set;
+        }
+
+
         public DatabaseContext() : base("ATWEBAPIDOTNET") {
             Configuration.LazyLoadingEnabled = true;
             Configuration.ProxyCreationEnabled = true;
+        }
+
+        protected override void OnModelCreating(DbModelBuilder mb) {
+            mb.Entity<BookAuthor>().HasKey(al => new { al.AuthorId, al.BookId });
+
         }
     }
 }

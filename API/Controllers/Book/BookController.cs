@@ -25,10 +25,12 @@ namespace API.Controllers.Book {
     [RoutePrefix("api/book")]
     public class BookController : ApiController {
 
-        public BookRepository GetBookRepository { get; }
+        private BookRepository      GetBookRepository { get; }
+        private AuthorRepository    GetAuthorRepository { get; }
 
         public BookController() {
             GetBookRepository = new BookRepository();
+            GetAuthorRepository = new AuthorRepository();
         }
 
         [HttpGet]
@@ -45,12 +47,19 @@ namespace API.Controllers.Book {
 
         [HttpPost]
         public IHttpActionResult Store(InputBookModel input) {
-            var book = GetBookRepository.Store(InputBookModel.Create(input));
+            var author = GetAuthorRepository.FindOne(input.IdAuthor);
 
-            if(book != null) {
-                var output = OutputBookModel.CreateOutput(book);
-                return CreatedAtRoute("DefaultApi", new { id = output.Id }, output);
+            if (author != null) {
+                var book = GetBookRepository.Store(InputBookModel.Create(input, author));
+
+                if(book != null) {
+                    var output = OutputBookModel.CreateOutput(book);
+                    return CreatedAtRoute("DefaultApi", new { id = output.Id }, output);
+                }
+
             }
+
+
             return BadRequest("Erro ao processar a solicitaçao");
         }
 

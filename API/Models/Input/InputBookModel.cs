@@ -1,6 +1,8 @@
 ﻿using CORE.Models;
+using DATA.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Web;
 
@@ -10,12 +12,27 @@ namespace API.Models.Input {
         public string ISBN { get; set; }
         public int Year { get; set; }
 
-        public static Book Create(InputBookModel input) {
-            return new Book() {
+        public int IdAuthor { get; set; }
+
+        public static Book Create(InputBookModel input, Author author) {
+            var books_authors = new Collection<BookAuthor>();
+
+            var new_book = new Book() {
                 Title = input.Title,
                 ISBN = input.ISBN,
-                Year = input.Year
+                Year = input.Year,
             };
+
+            var book_author = new BookAuthor() {
+                Author = author,
+                Book = new_book
+            };
+
+            books_authors.Add(book_author);
+
+            new_book.BookAuthors.Add(book_author);
+
+            return new_book;
         }
 
         public static Book UpdateBook(InputBookModel input, Book book) {

@@ -52,7 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\AuthorRepository.cs" />
     <Compile Include="Service\BookRepository.cs" />
+    <Compile Include="Service\IAuthor.cs" />
     <Compile Include="Service\IBook.cs" />
   </ItemGroup>
   <ItemGroup>
