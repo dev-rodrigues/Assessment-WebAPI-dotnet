@@ -1,4 +1,4 @@
-﻿@model WEB_APP.Models.BookViewModel
+﻿@model WEB_APP.Models.InputBookView
 
 @{
     ViewBag.Title = "Edit";
@@ -7,16 +7,13 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
-{
+@using(Html.BeginForm()) {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>BookViewModel</h4>
+        <h4>InputBookView</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -39,6 +36,19 @@
                 @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
             </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IdAuthor, htmlAttributes: new { @class = "control-label col-md-2" })
+            @*<div class="col-md-10">
+                @Html.EditorFor(model => model.IdAuthor, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IdAuthor, "", new { @class = "text-danger" })
+            </div>*@
+
+            <div class="col-md-10">
+                @Html.DropDownListFor(m => Model.IdAuthor, null, "-- selecione --", new { @class = "wa-select", @required = true })
+            </div>
+
         </div>
 
         <div class="form-group">

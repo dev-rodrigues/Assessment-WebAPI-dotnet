@@ -12,7 +12,7 @@ namespace API.Models.Input {
         public string ISBN { get; set; }
         public int Year { get; set; }
 
-        public int IdAuthor { get; set; }
+        public string IdAuthor { get; set; }
 
         public static Book Create(InputBookModel input, Author author) {
             var books_authors = new Collection<BookAuthor>();

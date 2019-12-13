@@ -22,6 +22,7 @@ using Newtonsoft.Json;
 
 namespace API.Controllers.Book {
 
+    [Authorize]
     [RoutePrefix("api/book")]
     public class BookController : ApiController {
 
@@ -47,7 +48,7 @@ namespace API.Controllers.Book {
 
         [HttpPost]
         public IHttpActionResult Store(InputBookModel input) {
-            var author = GetAuthorRepository.FindOne(input.IdAuthor);
+            var author = GetAuthorRepository.FindOne(Convert.ToInt32(input.IdAuthor));
 
             if (author != null) {
                 var book = GetBookRepository.Store(InputBookModel.Create(input, author));
