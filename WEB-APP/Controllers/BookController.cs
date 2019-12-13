@@ -23,7 +23,22 @@ namespace WEB_APP.Controllers {
             return View(posts);
         }
 
-        public ActionResult Create() {
+        public async Task<ActionResult> Create() {
+            var authors = new List<AuthorsViewModel>();
+
+            using(var client = new HttpClient()) {
+                client.BaseAddress = new Uri("http://localhost:60453");
+                var authors_response = await client.GetAsync($"api/author");
+                var responseContent = await authors_response.Content.ReadAsStringAsync();
+                authors = JsonConvert.DeserializeObject<List<AuthorsViewModel>>(responseContent);
+            }
+
+            ViewBag.IdAuthor = new SelectList(
+                authors,
+                "Id",
+                "Name"
+            );
+
             return View();
         }
 

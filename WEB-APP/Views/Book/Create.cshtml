@@ -41,10 +41,16 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.IdAuthor, htmlAttributes: new { @class = "control-label col-md-2" })
+
+            @*<div class="col-md-10">
+            @Html.EditorFor(model => model.IdAuthor, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.IdAuthor, "", new { @class = "text-danger" })
+        </div>*@
+
             <div class="col-md-10">
-                @Html.EditorFor(model => model.IdAuthor, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdAuthor, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(m => Model.IdAuthor, null, "-- selecione --", new { @class = "wa-select", @required = true })
             </div>
+
         </div>
 
         <div class="form-group">
