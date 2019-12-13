@@ -56,6 +56,7 @@
     <Compile Include="Service\BookRepository.cs" />
     <Compile Include="Service\IAuthor.cs" />
     <Compile Include="Service\IBook.cs" />
+    <Compile Include="Utils\Connection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DATA\DATA.csproj">

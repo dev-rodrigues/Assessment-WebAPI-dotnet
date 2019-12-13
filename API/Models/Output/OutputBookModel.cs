@@ -19,5 +19,15 @@ namespace API.Models.Output {
                 Year = book.Year
             };
         }
+
+        public static List<OutputBookModel> CreateOutput(List<Book> books) {
+            var outputs = new List<OutputBookModel>();
+
+            foreach(var obj in books) {
+                var o = CreateOutput(obj);
+                outputs.Add(o);
+            }
+            return outputs;
+        }
     }
 }

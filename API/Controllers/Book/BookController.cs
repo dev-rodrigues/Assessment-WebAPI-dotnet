@@ -74,6 +74,17 @@ namespace API.Controllers.Book {
             return BadRequest("Erro ao processar a solicitaçao");
         }
 
+        [HttpGet]
+        public IHttpActionResult AuthorsBooks(int id_author) {
+            var books = GetBookRepository.AuthorsBooks(id_author);
+
+            if(books != null) {
+                var output = OutputBookModel.CreateOutput(books);
+                return Ok(output);
+            }
+            return BadRequest("Erro ao processar a solicitaçao");
+        }
+
         [HttpPut]
         public IHttpActionResult Update(int book_id, InputBookModel input) {
             var old_book = GetBookRepository.Show(book_id);
