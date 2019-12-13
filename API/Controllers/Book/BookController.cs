@@ -38,8 +38,8 @@ namespace API.Controllers.Book {
             var books = GetBookRepository.Index();
 
             if(books != null) {
-
-                return Ok(books);
+                var output = OutputBookModel.CreateOutput(books);
+                return Ok(output);
             }
             return BadRequest("Erro ao processar a solicitaçao");
         }
