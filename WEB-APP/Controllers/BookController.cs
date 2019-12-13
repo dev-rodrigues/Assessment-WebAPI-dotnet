@@ -49,5 +49,16 @@ namespace WEB_APP.Controllers {
                 }
             }
         }
+
+        public async Task<ActionResult> Details(int Id) {
+            var book = new BookViewModel();
+            using(var client = new HttpClient()) {
+                client.BaseAddress = new Uri("http://localhost:60453");
+                var books_resopnse = await client.GetAsync($"api/Book/{Id}");
+                var responseContent = await books_resopnse.Content.ReadAsStringAsync();
+                book = JsonConvert.DeserializeObject<BookViewModel>(responseContent);
+            }
+            return View(book);
+        }
     }
 }
