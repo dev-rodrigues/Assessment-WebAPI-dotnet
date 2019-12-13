@@ -60,5 +60,70 @@ namespace WEB_APP.Controllers {
             }
             return View(book);
         }
+
+        public async Task<ActionResult> Edit(int Id) {
+            var book = new BookViewModel();
+            using(var client = new HttpClient()) {
+                client.BaseAddress = new Uri("http://localhost:60453");
+                var books_resopnse = await client.GetAsync($"api/Book/{Id}");
+                var responseContent = await books_resopnse.Content.ReadAsStringAsync();
+                book = JsonConvert.DeserializeObject<BookViewModel>(responseContent);
+            }
+            Session.Add("id_book", Id);
+            return View(book);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Edit(InputBookView model) {
+
+            var id_book = Session["id_book"];
+
+            var data = new Dictionary<string, string> {
+                { "Title", model.Title },
+                { "ISBN", model.ISBN },
+                { "Year", model.Year.ToString() },
+                { "IdAuthor", model.IdAuthor.ToString()}
+            };
+
+            using(var client = new HttpClient()) {
+                client.BaseAddress = new Uri("http://localhost:60453");
+
+                using(var requestContent = new FormUrlEncodedContent(data)) {
+                    var response = await client.PutAsync($"api/Book?book_id={id_book}", requestContent);
+                    if(response.IsSuccessStatusCode) {
+                        return RedirectToAction("Index");
+                    } else {
+                        return View("Error");
+                    }
+                }
+            }
+        }
+
+        public async Task<ActionResult> Delete(int Id) {
+            Session.Add("id_delete_book", Id);
+            var book = new BookViewModel();
+            using(var client = new HttpClient()) {
+                client.BaseAddress = new Uri("http://localhost:60453");
+                var books_resopnse = await client.GetAsync($"api/Book/{Id}");
+                var responseContent = await books_resopnse.Content.ReadAsStringAsync();
+                book = JsonConvert.DeserializeObject<BookViewModel>(responseContent);
+            }
+            return View(book);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Delete() {
+            var id_book = Session["id_delete_book"];
+            using(var client = new HttpClient()) {
+                client.BaseAddress = new Uri("http://localhost:60453");
+                var books_resopnse = await client.DeleteAsync($"api/Book/{id_book}");
+                var responseContent = await books_resopnse.Content.ReadAsStringAsync();
+
+                if(books_resopnse.IsSuccessStatusCode) {
+                    return RedirectToAction("Index");
+                }
+                return View("Error");
+            }
+        }
     }
 }
