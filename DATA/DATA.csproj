@@ -57,6 +57,10 @@
     <Compile Include="Migrations\201912130104391_init.designer.cs">
       <DependentUpon>201912130104391_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201912130127274_add-list-author.cs" />
+    <Compile Include="Migrations\201912130127274_add-list-author.designer.cs">
+      <DependentUpon>201912130127274_add-list-author.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Models\Book.cs" />
@@ -71,6 +75,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201912130104391_init.resx">
       <DependentUpon>201912130104391_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201912130127274_add-list-author.resx">
+      <DependentUpon>201912130127274_add-list-author.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

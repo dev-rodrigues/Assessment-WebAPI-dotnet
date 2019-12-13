@@ -17,5 +17,7 @@ namespace DATA.Models {
         public string LastName { get; set; }
         public string Email { get; set; }
         public DateTime? Birth { get; set; }
+
+        public ICollection<BookAuthor> BookAuthors { get; set; }
     }
 }
