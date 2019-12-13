@@ -21,7 +21,7 @@ namespace WEB_APP.Controllers {
             if(ModelState.IsValid) {
                 var data = new Dictionary<string, string> {
                     { "grant_type", "password" },
-                    { "username", model.Username },
+                    { "username", model.Email },
                     { "password", model.Password }
                 };
 
@@ -36,7 +36,7 @@ namespace WEB_APP.Controllers {
                             var tokenData = JObject.Parse(responseContent);
 
                             Session.Add("access_token", tokenData["access_token"]);
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Index", "Book");
                         }
                     }
                 }
